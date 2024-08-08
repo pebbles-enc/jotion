@@ -1,0 +1,1 @@
+Los archivos en esta carpeta fueron usados para el video hasta el minuto 38 más o menos
