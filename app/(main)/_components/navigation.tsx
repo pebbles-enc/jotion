@@ -193,7 +193,7 @@ export const Navigation = () => {
                 role="button"
                 onClick={resetWidth}
                 className="h-6 w-6 text-muted-foreground"
-                id="leonel andr"
+                id="leonel andres"
             />)}
           </nav>
       </div>
