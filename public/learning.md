@@ -114,9 +114,10 @@ const caca = () => {
   return (  );
 }
 ```
-- Esa wea es equivalente a declarar una constante caca = FUNCIÓN que hace lo que está dentro del {} al otro lado de la flecha. It's calle "fat arrow"
+- Esa wea es equivalente a declarar una constante caca = FUNCIÓN que hace lo que está dentro del {} al otro lado de la flecha. It's called "fat arrow"
 - Esta wea es útil por el this y weas complicadas de Javascript.
-
+- Importantísimo el uso de las arrow functions y entenderlo: [click acá](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
+  - En particular `() => ()` es una arrow function que devuelve un objeto (esta se usa harto en `map`). Ojo acá con usar `() => {}` pues aquí se espera una __función__ (con su `return` statement)
 - JSX requires tags to be explicitly closed: self-closing tags like &lt;img> must become &lt;img />, and wrapping tags like &lt;li>oranges must be written as &lt;li>oranges&lt;/li>.
 
 ### No children => self-closing tag
