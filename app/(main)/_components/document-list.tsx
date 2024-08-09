@@ -37,6 +37,8 @@ export const DocumentList = (
   })
   
   const onRedirect = (documentId: string) => {
+    // console.log("redirect bubbling being called")
+    // console.log(`${documentId}`)
     router.push(`/documents/${documentId}`);
   }
 
@@ -73,7 +75,12 @@ export const DocumentList = (
       <div key={document._id}>
         <Item
           id = {document._id}
-          onClick={() => onRedirect(document._id)}
+          onClick={() => {
+            // console.log("llamando acá");
+            // console.log(document._id);
+            onRedirect(document._id)
+
+          }}
           label={document.title}
           icon={FileIcon}
           documentIcon={document.icon}

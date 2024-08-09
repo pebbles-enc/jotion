@@ -2,10 +2,14 @@
 
 import { Id } from "@/convex/_generated/dataModel";
 
-import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
+import { ChevronDown, ChevronRight, LucideIcon, Plus, PlusIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
+import { useMutation } from "convex/react";
+import { api } from "@/convex/_generated/api";
+import { useRouter } from "next/navigation";
+import { toast } from "sonner";
 
 interface ItemProps {
   id?: Id<"documents">; // the id? means this is optional
@@ -34,12 +38,43 @@ export const Item = (
     expanded
   } : ItemProps
 ) => {
+  const router = useRouter();
+  const create = useMutation(api.documents.create);
 
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
   ) => {
+    // console.log("esto no se llama")
     event?.stopPropagation();
     onExpand?.();
+  }
+
+  const onCreate = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    // console.log("item (inner HTML element) being called")
+    // console.log(id)
+    event.stopPropagation();
+    if (!id) return;
+
+    const promise = create({ title: "Untitled", parentDocument: id})
+      .then((documentId) => {
+        // console.log("fuera del !expanded")
+        if (!expanded) {
+          // console.log("justo antes del onExpand")
+          onExpand?.();
+          // console.log("después del onExpand")
+        }
+        // router.push(`/documents/${documentId}`)
+
+        toast.promise(promise, {
+          loading: "Creating a new note...",
+          success: "New note created!",
+          error: "Failed to create a new note"
+        })
+      })
+
+
   }
 
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
@@ -63,7 +98,7 @@ export const Item = (
           role="button"
           className="h-full rounded-sm hover:bg-neutral-300
           dark:bg-neutral-600 mr-1"
-          onClick = { handleExpand}
+          onClick = { handleExpand }
         >
           <ChevronIcon 
             className="h-4 w-4 shrink-0 text-muted-foreground/50"
@@ -89,6 +124,18 @@ export const Item = (
         opacity-100">
           <span className="text-xs">⌘</span>K
         </kbd>
+      )}
+      {!!id && (
+        <div className="ml-auto flex items-center gap-x-2">
+          <div
+            role="button"
+            onClick={onCreate}
+            className="opacity-0 group-hover:opacity-100 h-full ml-auto
+            rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-600"
+          >
+            <Plus className="h-4 w-4 text-muted-foreground"/>
+          </div>
+        </div>
       )}
     </div> // La wea de arriba de como estoy llamando el Icon no lo entendí ni por si acaso
   )
