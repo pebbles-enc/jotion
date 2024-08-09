@@ -14,6 +14,7 @@ import type {
   FilterApi,
   FunctionReference,
 } from "convex/server";
+import type * as _middleware_utils from "../_middleware/utils.js";
 import type * as documents from "../documents.js";
 
 /**
@@ -25,6 +26,7 @@ import type * as documents from "../documents.js";
  * ```
  */
 declare const fullApi: ApiFromModules<{
+  "_middleware/utils": typeof _middleware_utils;
   documents: typeof documents;
 }>;
 export declare const api: FilterApi<

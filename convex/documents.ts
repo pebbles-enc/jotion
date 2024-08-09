@@ -2,6 +2,40 @@ import { v } from "convex/values";
 
 import { mutation, query } from "./_generated/server";
 import { Doc, Id} from "./_generated/dataModel";
+import { requiresAuth } from "./_middleware/utils";
+
+export const archive = mutation({
+  args: { id: v.id("documents") },
+  handler: async (ctx, args) => {
+    const identity = await ctx.auth.getUserIdentity();
+
+    if (!identity) {
+      throw new Error("Not authenticated")
+    }
+
+    requiresAuth(ctx, args);
+
+    const userID = identity.subject;
+
+    const existingDocument = await ctx.db.get(args.id);
+
+    if (!existingDocument) {
+      throw new Error("Not found")
+    }
+
+    if (existingDocument.userId !== userID) {
+      throw new Error("Unauthorized")
+    }
+
+    const document = await ctx.db.patch(args.id, {
+      isArchived: true,
+    })
+
+    // const recursiveArchive = async 
+
+    return document;
+  }
+})
 
 export const getSidebar = query({
   args: {
@@ -13,6 +47,8 @@ export const getSidebar = query({
     if (!identity) {
       throw new Error("Not authenticated")
     }
+
+    requiresAuth(ctx, args);
 
     const userId = identity.subject;
 
