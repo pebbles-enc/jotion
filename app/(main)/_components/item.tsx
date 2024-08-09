@@ -35,6 +35,13 @@ export const Item = (
   } : ItemProps
 ) => {
 
+  const handleExpand = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event?.stopPropagation();
+    onExpand?.();
+  }
+
   const ChevronIcon = expanded ? ChevronDown : ChevronRight;
 
 
