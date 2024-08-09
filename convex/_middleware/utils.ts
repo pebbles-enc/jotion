@@ -4,6 +4,6 @@ export async function requiresAuth(ctx: any, args: any) {
     if (!identity) {
       throw new Error("Not authenticated")
     }
-
-    console.log("caca")
+    
+    return identity;
 }

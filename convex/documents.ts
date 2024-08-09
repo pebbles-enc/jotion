@@ -13,7 +13,7 @@ export const archive = mutation({
       throw new Error("Not authenticated")
     }
 
-    requiresAuth(ctx, args);
+    // const identity = requiresAuth(ctx, args);
 
     const userID = identity.subject;
 
@@ -48,7 +48,7 @@ export const getSidebar = query({
       throw new Error("Not authenticated")
     }
 
-    requiresAuth(ctx, args);
+    // requiresAuth(ctx, args);
 
     const userId = identity.subject;
 
