@@ -159,3 +159,7 @@ const caca = () => {
 # Misc
 - Creo que usa `page.tsx` como en Encuadrado usamos `index.html`, index en general
 - Every layout component has children
+
+## VS Code
+- Me bajé la extensión de las fast arrows
+- En el 3:20:00 más o menos Antonio explica como poner format automático al guardar

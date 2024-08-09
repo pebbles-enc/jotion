@@ -5,6 +5,7 @@ import { Id } from "@/convex/_generated/dataModel";
 import { ChevronDown, ChevronRight, LucideIcon } from "lucide-react";
 
 import { cn } from "@/lib/utils";
+import { Skeleton } from "@/components/ui/skeleton";
 
 interface ItemProps {
   id?: Id<"documents">; // the id? means this is optional
@@ -57,11 +58,13 @@ export const Item = (
           dark:bg-neutral-600 mr-1"
           onClick = { () => {} }
         >
-          <ChevronIcon />
+          <ChevronIcon 
+            className="h-4 w-4 shrink-0 text-muted-foreground/50"
+          />
         </div>
       )}
       {documentIcon ? (
-        <div className="shirnk-0 mr-2 text-[18px]">
+        <div className="shrink-0 mr-2 text-[18px]">
           {documentIcon}
         </div>
        ) : 
@@ -81,5 +84,23 @@ export const Item = (
         </kbd>
       )}
     </div> // La wea de arriba de como estoy llamando el Icon no lo entendí ni por si acaso
+  )
+}
+
+Item.Skeleton = function ItemSkeleton({level} : { level?: number}) {
+  return (
+    <div
+    style={{
+      paddingLeft: level ? `${level * 12 + 25}px` : "12px"
+    }}
+    className="flex gap-x-2 py-[3px]"
+    >
+      <Skeleton 
+        className="h-4 w-4"
+      />
+      <Skeleton 
+        className="h-4 w-[30%]"
+      />
+    </div>
   )
 }

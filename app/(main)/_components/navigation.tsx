@@ -9,7 +9,7 @@ import { useMediaQuery } from "usehooks-ts";
 // specially regarding a sidebar that can be resizible through dragging
 // We are going to define what is mobile and desktop through Javascript -> useMediaQuery
 
-import { useMutation, useQuery } from "convex/react";
+import { useMutation, useQuery } from "convex/react"; // useQuery was used for the un-beautiful list of documents
 import { api } from "@/convex/_generated/api" ;
 
 import { cn } from "@/lib/utils";
@@ -17,6 +17,7 @@ import { cn } from "@/lib/utils";
 
 import UserItem from "./user-item";
 import { Item } from "./item";
+import { DocumentList } from "./document-list";
 import { toast } from "sonner";
 
 export const Navigation = () => {
@@ -158,7 +159,7 @@ export const Navigation = () => {
             onClick ={ () => {} }
            />
            <Item 
-            label="Search"
+            label="Settings"
             icon={Settings}
             onClick ={ () => {} }
            />
@@ -168,10 +169,13 @@ export const Navigation = () => {
            />
         </div>
         <div className="mt-4">
+          <DocumentList />
+        </div>
+        {/* <div className="mt-4"> This was the un-beautiful list of documents
             {documents?.map((document) => (
               <p key={document._id}>{document.title}</p>
             ))}
-        </div>
+        </div> */}
         <div
           onMouseDown={handleMouseDown}
           onDoubleClick={resetWidth} // A mí se me ocurrió hacerlo double click =)
