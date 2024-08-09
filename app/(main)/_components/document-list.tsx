@@ -26,7 +26,7 @@ export const DocumentList = (
   const [expanded, setExpanded] = useState<Record<string, boolean>>({}); // Defining type for "complex" states https://www.robinwieruch.de/typescript-react-usestate/
 
   const onExpand = (documentId: string) => {
-    setExpanded(prevExpanded => ({
+    setExpanded((prevExpanded) => ({
       ...prevExpanded,
       [documentId]: !prevExpanded[documentId]
     }));
