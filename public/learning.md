@@ -9,6 +9,7 @@
   - Route groups: eso es la wea de la carpeta `(root)` que no entendí, que también afectó un archivo `page.ts` con los imports, dentro de la carpeta `.next` en el root del proyecto
     - Así puedo hacer layouts por grupo
     - La carpeta marcada con () NO afecta el URL, es solo para organizar. No es parte de la URL hasta que se llega a un folder sin () y que es un path
+  - Rutas variables: `[documentId]`
 
 ## Shadcn-ui
 - Es un "materialUI": una libería de componentes UX/UI ya hechos y que están on top de Tailwind (además de poner sus propias clases, como `text-muted-foreground`).
