@@ -21,6 +21,7 @@ import { Item } from "./item";
 import { DocumentList } from "./document-list";
 import { toast } from "sonner";
 import { Popover, PopoverTrigger, PopoverContent} from "@/components/ui/popover";
+import { TrashBox } from "./trash-box";
 
 export const Navigation = () => {
   const pathname = usePathname();
@@ -186,7 +187,7 @@ export const Navigation = () => {
             className="p-0 w-72"
             side={isMobile ? "bottom": "right"}
           >
-            <p>Trash box</p>
+            <TrashBox />
           </PopoverContent>
         </Popover>
         {/* <div className="mt-4"> This was the un-beautiful list of documents
