@@ -13,7 +13,6 @@ import { useMutation, useQuery } from "convex/react"; // useQuery was used for t
 import { api } from "@/convex/_generated/api" ;
 
 import { cn } from "@/lib/utils";
-
 // definition is that it is a tiny (239B) utility for constructing className strings conditionally.
 
 import UserItem from "./user-item";
@@ -23,7 +22,10 @@ import { toast } from "sonner";
 import { Popover, PopoverTrigger, PopoverContent} from "@/components/ui/popover";
 import { TrashBox } from "./trash-box";
 
+import { useSearch } from "@/hooks/use-search";
+
 export const Navigation = () => {
+  const search = useSearch();
   const pathname = usePathname();
   const isMobile = useMediaQuery("(max-width: 768px") // Same breakpoint for md in Tailwind
   // const documents = useQuery(api.documents.get);
@@ -159,7 +161,7 @@ export const Navigation = () => {
             label="Search"
             icon={Search}
             isSearch
-            onClick ={ () => {} }
+            onClick ={ search.onOpen}
            />
            <Item 
             label="Settings"
