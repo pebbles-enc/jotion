@@ -1,6 +1,6 @@
 "use client";
 
-import { ChevronLeftIcon, MenuIcon, PlusCircle, Search, Settings } from "lucide-react";
+import { ChevronLeftIcon, MenuIcon, Plus, PlusCircle, Search, Settings } from "lucide-react";
 import { usePathname } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState} from "react";
 
@@ -163,13 +163,18 @@ export const Navigation = () => {
             icon={Settings}
             onClick ={ () => {} }
            />
-           <Item onClick= {handleCreate} 
+           <Item onClick={handleCreate}  
            label="New page"
            icon={PlusCircle}
            />
         </div>
         <div className="mt-4">
           <DocumentList />
+          <Item 
+            onClick={handleCreate}
+            icon={Plus}
+            label="Add a page"
+          />
         </div>
         {/* <div className="mt-4"> This was the un-beautiful list of documents
             {documents?.map((document) => (
