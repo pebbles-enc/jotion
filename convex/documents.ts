@@ -7,13 +7,7 @@ import { requiresAuth } from "./_middleware/utils";
 export const archive = mutation({
   args: { id: v.id("documents") },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-
-    if (!identity) {
-      throw new Error("Not authenticated")
-    }
-
-    // const identity = requiresAuth(ctx, args);
+    const identity = await requiresAuth(ctx, args);
 
     const userID = identity.subject;
 
@@ -42,13 +36,7 @@ export const getSidebar = query({
     parentDocument: v.optional(v.id("documents"))
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-
-    if (!identity) {
-      throw new Error("Not authenticated")
-    }
-
-    // requiresAuth(ctx, args);
+    const identity = await requiresAuth(ctx, args);
 
     const userId = identity.subject;
 
@@ -73,11 +61,8 @@ export const getSidebar = query({
 
 export const get = query({
   
-  handler: async (ctx) => {
-    const identity = await ctx.auth.getUserIdentity();
-    if (!identity) {
-      throw new Error("Not authenticated");
-    }
+  handler: async (ctx, args) => {
+    const identity = await requiresAuth(ctx, args);
 
     const documents = await ctx.db.query("documents").collect();
 
@@ -91,11 +76,7 @@ export const create = mutation({
     parentDocument: v.optional(v.id("documents"))
   },
   handler: async (ctx, args) => {
-    const identity = await ctx.auth.getUserIdentity();
-    // Early return in Typescript, Node, Convex =)
-    if (!identity) {
-      throw new Error("Not authenticated");
-    }
+    const identity = await requiresAuth(ctx, args);
 
     const userId = identity.subject;
 
