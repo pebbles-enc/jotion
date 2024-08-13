@@ -1,4 +1,4 @@
-export async function requiresAuth(ctx: any, args: any) {
+export async function requiresAuth(ctx: any, args?: any) {
   const identity = ctx.auth.getUserIdentity();
 
     if (!identity) {
