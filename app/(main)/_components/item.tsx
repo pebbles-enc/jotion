@@ -2,7 +2,8 @@
 
 import { Id } from "@/convex/_generated/dataModel";
 
-import { ChevronDown, ChevronRight, LucideIcon, Plus, PlusIcon } from "lucide-react";
+import { ChevronDown, ChevronRight, LucideIcon, MoreHorizontal, 
+  Plus, PlusIcon, Trash } from "lucide-react";
 
 import { cn } from "@/lib/utils";
 import { Skeleton } from "@/components/ui/skeleton";
@@ -10,6 +11,12 @@ import { useMutation } from "convex/react";
 import { api } from "@/convex/_generated/api";
 import { useRouter } from "next/navigation";
 import { toast } from "sonner";
+import { DropdownMenu, 
+  DropdownMenuTrigger,
+  DropdownMenuContent,
+  DropdownMenuItem,
+  DropdownMenuSeparator } from "@/components/ui/dropdown-menu";
+import { useUser } from "@clerk/clerk-react";
 
 interface ItemProps {
   id?: Id<"documents">; // the id? means this is optional
@@ -38,8 +45,24 @@ export const Item = (
     expanded
   } : ItemProps
 ) => {
+  const { user } = useUser();
   const router = useRouter();
   const create = useMutation(api.documents.create);
+  const archive = useMutation(api.documents.archive);
+
+  const onArchive = (
+    event: React.MouseEvent<HTMLDivElement, MouseEvent>
+  ) => {
+    event.stopPropagation();
+    if (!id) return;
+    const promise = archive({ id });
+
+    toast.promise(promise, {
+      loading: "Moving to trash...",
+      success: "Note moved to trash",
+      error:"Failed to archive note"
+    })
+  }
 
   const handleExpand = (
     event: React.MouseEvent<HTMLDivElement, MouseEvent>
@@ -135,6 +158,37 @@ export const Item = (
           >
             <Plus className="h-4 w-4 text-muted-foreground"/>
           </div>
+          <DropdownMenu>
+            <DropdownMenuTrigger 
+              onClick={(e) => {e.stopPropagation()}}
+              asChild
+            >
+              <div
+                role="button"
+                className="opacity-0 group-hover:opacity-100 h-full ml-auto
+                rounded-sm hover:bg-neutral-300 dark:hover:bg-neutral-500"
+              >
+                <MoreHorizontal className="h-4 w-4 text-muted-foreground"/>
+                <DropdownMenuContent
+                className="w-60"
+                align="start"
+                side="right"
+                forceMount
+              >
+                <DropdownMenuItem onClick={onArchive}>
+                  <Trash className="h-4 w-4 mr-2"/>
+                  Delete
+                </DropdownMenuItem>
+                <DropdownMenuSeparator />
+                <div className="text-xs text-muted-foreground">
+                  Last edited by: {user?.fullName}
+                </div>
+              </DropdownMenuContent>
+              </div>
+
+            </DropdownMenuTrigger>
+
+          </DropdownMenu>
         </div>
       )}
     </div> // La wea de arriba de como estoy llamando el Icon no lo entendí ni por si acaso
