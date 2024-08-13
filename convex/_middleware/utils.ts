@@ -1,9 +1,9 @@
 export async function requiresAuth(ctx: any, args: any) {
-  const identity = await ctx.auth.getUserIdentity();
+  const identity = ctx.auth.getUserIdentity();
 
     if (!identity) {
       throw new Error("Not authenticated")
     }
-    
+    // console.log("todo en orden!")
     return identity;
 }
