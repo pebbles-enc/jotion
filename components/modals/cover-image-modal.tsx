@@ -30,7 +30,6 @@ export const CoverImageModal = () => {
   }
 
   const onChange = async (file?: File) => {
-    console.log("onChange llamado")
     if (!file) {
       return;
     }
@@ -52,7 +51,7 @@ export const CoverImageModal = () => {
         file
       });
     }
-    
+
     await update({
       id: params.documentId as Id<"documents">,
       coverImage: res.url

@@ -1,7 +1,7 @@
 "use client";
 
 import { ChevronLeftIcon, MenuIcon, Plus, PlusCircle, Search, Settings, Trash } from "lucide-react";
-import { useParams, usePathname } from "next/navigation";
+import { useParams, usePathname, useRouter } from "next/navigation";
 import { ElementRef, useEffect, useRef, useState} from "react";
 
 import { useMediaQuery } from "usehooks-ts";
@@ -31,6 +31,7 @@ export const Navigation = () => {
   const params = useParams();
   const settings = useSettings();
   const pathname = usePathname();
+  const router = useRouter();
   const isMobile = useMediaQuery("(max-width: 768px") // Same breakpoint for md in Tailwind
   // const documents = useQuery(api.documents.get);
   const create = useMutation(api.documents.create)
@@ -128,7 +129,9 @@ export const Navigation = () => {
   }
 
   const handleCreate = () => {
-    const promise = create({ title: "Untitled" });
+    const promise = create({ title: "Untitled" })
+      .then((documentId) => router.push(`/documents/${documentId}`));
+
     // TODO: ver como refactorizar este toaster y después importarlo en otro lado
     // escribo este código varias veces y en verdad es una función handleToaster
     toast.promise(promise, {
