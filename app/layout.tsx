@@ -1,3 +1,5 @@
+import { EdgeStoreProvider } from '../lib/edgestore';
+
 import { Toaster } from "sonner";
 
 import { ThemeProvider } from "@/components/providers/theme-provider";
@@ -39,19 +41,20 @@ export default function RootLayout({
       <body className={inter.className}
       >
         <ConvexClientProvider>
-          <ThemeProvider
-            attribute="class"
-            defaultTheme="system"
-            enableSystem
-            disableTransitionOnChange
-            storageKey="jotion-theme"
-          > 
-            <Toaster position="bottom-center"/>
-            <ModalProvider />
-            {children}
-          </ThemeProvider>
+          <EdgeStoreProvider>
+            <ThemeProvider
+              attribute="class"
+              defaultTheme="system"
+              enableSystem
+              disableTransitionOnChange
+              storageKey="jotion-theme"
+            > 
+              <Toaster position="bottom-center"/>
+              <ModalProvider />
+              {children}
+            </ThemeProvider>
+          </EdgeStoreProvider>
         </ConvexClientProvider>
-
       </body>
     </html>
   );
