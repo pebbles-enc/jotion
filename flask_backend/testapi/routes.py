@@ -13,6 +13,10 @@ testapi = Blueprint("test", __name__)
 def hello_world():
     return "<p>Hello, World zorrillooo asdas!</p>"
 
+@testapi.route("/hello-world-render-template")
+def hello_world_render_template():
+    return render_template("helloworld.html")
+
 @testapi.route("/db-read-check")
 def db_read_check():
     first_row = HelloModel.get_one_row(1)
