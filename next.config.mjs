@@ -4,6 +4,14 @@ const nextConfig = {
     domains: [
       "files.edgestore.dev"
     ]
+  },
+  rewrites: async () => {
+    return [
+      {
+        source: '/flask_backend/:path*',
+        destination: 'http://localhost:5000/:path*'
+      }
+    ]
   }
 };
 

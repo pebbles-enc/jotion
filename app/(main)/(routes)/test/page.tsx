@@ -1,8 +1,9 @@
 const TestPage = () => {
-  return (  
+  return (
     <div>
-      Hello test page
+      Hello World desde Next
     </div>
+
   );
 }
  
