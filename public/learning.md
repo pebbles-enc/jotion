@@ -120,6 +120,7 @@ const caca = () => {
 - Importantísimo el uso de las arrow functions y entenderlo: [click acá](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions)
   - En particular `() => ()` es una arrow function que devuelve un objeto (esta se usa harto en `map`). Ojo acá con usar `() => {}` pues aquí se espera una __función__ (con su `return` statement)
 - JSX requires tags to be explicitly closed: self-closing tags like &lt;img> must become &lt;img />, and wrapping tags like &lt;li>oranges must be written as &lt;li>oranges&lt;/li>.
+- Comentar en JSX = {// } o {/* */} => Básicamente, abre una ventana a javascript y comenta.
 
 ### No children => self-closing tag
 - [In JSX, tags that don't have children should be self-closed, just like in XML](https://codedamn.com/news/reactjs/not-closing-jsx-tags-properly#common_mistakes_when_closing_jsx_tags)
@@ -140,10 +141,25 @@ const caca = () => {
 - _components folders are for not reusable components
 - reusable components go into the components folder
 
+### Server side components
+- __Puedo hacer componentes async__. Page is an async component. This allows you to use await to fetch data (del curso de Next Js)
+- Los console.log que haga acá (esto es un brain-fuck porque JS es "front" y Python es back) __salen en el terminal__, no en la consola.
+### Client side componentes
+- Directiva `"use client;"` al principio. Esto es necesario para poder usar React "puro": useState, useEffects, etc. etc. Si tratas de usar React puro y no se puede, va a llorar.
+- Son rendereados en el cliente. En general, se incrustan a server side components. La heurísitca es: ¿es súper responsivo mi componente? Si sí, probablemente client side.
+- Los console.log que haga acá salen en la consola, como siempre.
+
 ### Insights
 - En React, todo son funciones al final. Los componenetes pareciera que son funciones
 
 # Back-end
+
+## Next Back-end
+- Los capítulos 6 a 9 del curso de Learn next son clave.
+- Hay cosas bien interesantes de performance. En particular, como hacer carga correcta de componentes (static, dynamic, streaming). [Con streaming + skeletons](https://nextjs.org/learn/dashboard-app/streaming), se pueden hacer los UI exquisitos!
+  - Esto es __independiente__ de qué back-end se use para fetchear la data. O sea, lo voy a tener que probar, pero igual.
+- Algo bien importante es como propone Vercel hacerse cargo de las búsquedas y todo eso (capítulo 10). En el fondo, ellos prefieren y empujan hacerlo en el front.
+- También muy importante es el capítulo de mutar la data [(CRUD)](https://nextjs.org/learn/dashboard-app/mutating-data)
 
 ## Convex
 - Es una plataforma agilada para hacer weas de la puta y, en particular, me va a gestionar el back-end
