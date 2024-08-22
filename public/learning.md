@@ -181,3 +181,14 @@ const caca = () => {
 ## VS Code
 - Me bajé la extensión de las fast arrows
 - En el 3:20:00 más o menos Antonio explica como poner format automático al guardar
+
+# Flask - Next / React
+## Rewrites
+- Con rewrites pude rutear - condicionalmente - llamados al back-end en Flask. El server en :5000 tiene que estar encendido por supuesto.
+- No es difícil, works "out of the box" la verdad. Tengo un tab en Tabox con la literatura mínima para hacerlo.
+- __Importante__: La prueba que hice me muestra lo que está pasando en localhost: localhost:3000/flask_backend/test-que-quiera. Es decir, hubo una especie de "redirección" del puerto (notar el 3000, no 5000)
+
+## GET y POST, llamados duplicados
+- Ni POST, PATCH, PUT, DELETE se llaman 2 veces.
+- Me da la sensación de que los GET __no hay forma__ que no se llamen 2 veces, incluso en producción. Esto NO es por ReactStrictMode (ya probé desactivándolo y para navegación en Next __sí se deja de llamar 2 veces__ pero para Flask-GET sigue llamándose 2 veces) si no por el tema de rewrites en sí y automatic static optimization.
+  - Por lo tanto, este comportamiento intuyo que también va a psar en producción y, si es así, entonces __no se puede usar rewrites para ir a Flask__. NO OBSTANTE: si se puede rutear a Flask directo (tal como lo hago en development con localhost:500, CREO). Seguro puedo configurar para que en el server se escuchen los puertos 3000 y 5000 independientemente y con rewrites mandar de un 3000 a Flask (pero ahí no hacer el GET)
