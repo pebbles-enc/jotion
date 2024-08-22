@@ -11,6 +11,7 @@ import { toast } from "sonner";
 
 
 const DocumentsPage = () => {
+  console.log("hola!!!")
   const { user } = useUser();
   const create = useMutation(api.documents.create);
 
